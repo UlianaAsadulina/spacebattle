@@ -6,10 +6,35 @@ body {
 }
 
 .header {
+    align-items: center;
     height: fit-content;
     font-size: 25px;
     font-weight: bold;
     text-align: center;
+}
+
+
+  
+.neon-glow-button {
+    /* display: flex; */
+    align-items: center;
+    padding: 15px 30px;
+    font-size: 18px;
+    /* font-weight: bold; */
+    color: white;
+    background: #282828;
+    border: none;
+    border-radius: 30px;
+    box-shadow: 0 0 20px  #0010a1;
+    text-shadow: 0 0 10px hwb(266 0% 0%);
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+
+.neon-glow-button:hover {
+    box-shadow: 0 0 20px #0019f8, 0 0 30px #0019f8, 0 0 40px #0019f8;
+    scale: 120%;
 }
 
 
