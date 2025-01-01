@@ -1,6 +1,9 @@
 body {
     margin: 0px;
     padding: 0px;
+    background-image: url(/img/space.jpeg);
+    background-repeat: no-repeat;
+    background-size: cover;
     background-color: black;
     color: white;
 }
@@ -54,13 +57,65 @@ body {
 
 .mainSpace {
     width: 100vw;
-    height: 300px;
+    height: 400px;
     display: flex;
 }
 
-.spaceship, .alien {
+.spaceship {
     width: 50%;
     border: solid white;
+    background-image: url(img/Assembly.jpeg);
+    background-repeat: no-repeat;
+    background-size: contain;
+}
+
+.alien {
+    width: 50%;
+    margin-left: auto;
+    border: solid white;
+    background-image: url(img/Alien1.jpeg);
+    background-repeat: no-repeat;
+    background-size: contain;
+}
+
+.alien2 {
+    width: 50%;
+    border: solid white;
+    background-image: url(img/Alien2.jpeg);
+    background-repeat: no-repeat;
+    background-size: contain;
+}
+
+.alien3 {
+    width: 50%;
+    border: solid white;
+    background-image: url(img/Alien3.jpeg);
+    background-repeat: no-repeat;
+    background-size: contain;
+}
+
+.alien4 {
+    width: 50%;
+    border: solid white;
+    background-image: url(img/Alien4.jpeg);
+    background-repeat: no-repeat;
+    background-size: contain;
+}
+
+.alien5 {
+    width: 50%;
+    border: solid white;
+    background-image: url(img/Alien5.jpeg);
+    background-repeat: no-repeat;
+    background-size: contain;
+}
+
+.alien6 {
+    width: 50%;
+    border: solid white;
+    background-image: url(img/Alien6.jpeg);
+    background-repeat: no-repeat;
+    background-size: contain;
 }
 
 .info {
