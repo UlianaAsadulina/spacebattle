@@ -54,7 +54,7 @@ END GAME
 */
 
 // --------GAME START ---------------
-    
+
 /* 
 Initialize USS Assembly spaceship with:
         hull = 20
@@ -63,13 +63,41 @@ Initialize USS Assembly spaceship with:
 */
 
 class AssemblySpaceship {
-    constructor (name) {
-        this.name = name;
-        this.hull = 20;
-        this.firepower = 5;
-        this.accuracy = 0.7;
-    }
+  constructor(name) {
+    this.name = name;
+    this.hull = 20;
+    this.firepower = 5;
+    this.accuracy = 0.7;
+  }
 }
 
-const usShip = new AssemblySpaceship('USS Assembly spaceship');
-console.log (usShip);
+const usShip = new AssemblySpaceship("USS Assembly spaceship");
+console.log(usShip);
+
+/*Initialize an empty array for alien ships
+    FOR i = 1 TO 6
+        Generate random alien ship properties:
+            hull = random value between 3 and 6
+            firepower = random value between 2 and 4
+            accuracy = random value between 0.6 and 0.8
+        Add alien ship to the alien ships array*/
+
+function getRandomValue(min, max) {
+  return Math.random() * (max - min) + min;
+}
+
+class AlienSpaceship {
+  constructor(name) {
+    this.name = name;
+    this.hull = Math.round(getRandomValue(3, 6));
+    this.firepower = Math.round(getRandomValue(2, 4));
+    this.accuracy = getRandomValue(0.6, 0.8);
+  }
+}
+
+let alienShips = [];
+for (let i = 0; i < 6; i++) {
+  alienShips[i] = new AlienSpaceship(`AlienSpaceship ${i + 1}`);
+}
+
+console.log(alienShips);
