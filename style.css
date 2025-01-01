@@ -18,12 +18,12 @@ body {
 
 
   
-.neon-glow-button {
-    /* display: flex; */
+.startBtn {
+    
     align-items: center;
     padding: 15px 30px;
     font-size: 18px;
-    /* font-weight: bold; */
+    
     color: white;
     background: #282828;
     border: none;
@@ -35,7 +35,7 @@ body {
 }
 
 
-.neon-glow-button:hover {
+.startBtn:hover {
     box-shadow: 0 0 20px #0019f8, 0 0 30px #0019f8, 0 0 40px #0019f8;
     scale: 120%;
 }
@@ -61,7 +61,13 @@ body {
     display: flex;
 }
 
-.spaceship {
+.spaceship, .alien {
+    width: 50%;
+    border: solid white;
+    
+}
+
+.usship {
     width: 50%;
     border: solid white;
     background-image: url(img/Assembly.jpeg);
@@ -69,16 +75,17 @@ body {
     background-size: contain;
 }
 
-.alien {
-    width: 50%;
-    margin-left: auto;
+.alien0 {
+    width: 50%;  
     border: solid white;
     background-image: url(img/Alien1.jpeg);
     background-repeat: no-repeat;
     background-size: contain;
+    
+
 }
 
-.alien2 {
+.alien1 {
     width: 50%;
     border: solid white;
     background-image: url(img/Alien2.jpeg);
@@ -86,7 +93,7 @@ body {
     background-size: contain;
 }
 
-.alien3 {
+.alien2 {
     width: 50%;
     border: solid white;
     background-image: url(img/Alien3.jpeg);
@@ -94,7 +101,7 @@ body {
     background-size: contain;
 }
 
-.alien4 {
+.alien3 {
     width: 50%;
     border: solid white;
     background-image: url(img/Alien4.jpeg);
@@ -102,7 +109,7 @@ body {
     background-size: contain;
 }
 
-.alien5 {
+.alien4 {
     width: 50%;
     border: solid white;
     background-image: url(img/Alien5.jpeg);
@@ -110,7 +117,7 @@ body {
     background-size: contain;
 }
 
-.alien6 {
+.alien5 {
     width: 50%;
     border: solid white;
     background-image: url(img/Alien6.jpeg);
@@ -124,7 +131,7 @@ body {
     text-align: center;
 }
 
-.roundNext {
+.nextBtn {
     position: relative;
     background-color:#282828;
     border-radius: 20px;
@@ -142,12 +149,12 @@ body {
    
 }
   
-.roundNext:hover {
+.nextBtn:hover {
     transition-duration: 0.1s;
     background-color: #474646;
 }
   
-.roundNext:after {
+.nextBtn:after {
     content: "";
     display: block;
     position: absolute;
@@ -161,7 +168,7 @@ body {
     box-shadow: 0 0 0 30px #0019f8;
 }
   
-.roundNext:active:after {
+.nextBtn:active:after {
     box-shadow: 0 0 0 0 white;
     position: absolute;
     border-radius: 20px;
@@ -171,7 +178,3 @@ body {
     transition: 0s;
 }
   
-/* .roundNext:active {
-    top: 1px; 
-}
-   */

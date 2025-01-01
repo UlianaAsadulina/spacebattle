@@ -55,6 +55,21 @@ END GAME
 
 // --------GAME START ---------------
 
+const start = document.querySelector(".startBtn");
+const next = document.querySelector(".nextBtn");
+
+const title = document.getElementById("title");
+const round = document.getElementById("round");
+const winner = document.getElementById("winner");
+
+const shipName = document.getElementById("shipName");
+const shipHealth = document.getElementById("shipHealth");
+const alienName = document.getElementById("alienName");
+const alienHealth = document.getElementById("alienHealth");
+/*
+            <div class="spaceship"></div>
+            <div class="alien"><
+*/
 /* 
 Initialize USS Assembly spaceship with:
         hull = 20
@@ -72,7 +87,7 @@ class AssemblySpaceship {
 }
 
 const usShip = new AssemblySpaceship("USS Assembly spaceship");
-console.log(usShip);
+// console.log(usShip);
 
 /*Initialize an empty array for alien ships
     FOR i = 1 TO 6
@@ -100,7 +115,7 @@ for (let i = 0; i < 6; i++) {
   alienShips[i] = new AlienSpaceship(`AlienSpaceship ${i + 1}`);
 }
 
-console.log(alienShips);
+// console.log(alienShips);
 
 /*
 PLAYER ATTACK
@@ -115,23 +130,23 @@ PLAYER ATTACK
         DISPLAY "You missed!"             
 
 */
+let spaceshipIndex = 0;
 
 // let currentAlien = parseInt(getRandomValue (0,5));
 // console.log(currentAlien);
 // console.log(alienShips[currentAlien]);
 function us_attack() {
   if (Math.random() < usShip.accuracy) {
-    console.log("Direct hit! Alien ship took damage!");
+    winner.textContent ="Direct hit! Alien ship took damage!";
     alienShips[spaceshipIndex].hull -= usShip.firepower;
+    alienHealth.textContent = "Hull " + alienShips[spaceshipIndex].hull;
     // console.log(alienShips[spaceshipIndex].hull);
     if (alienShips[spaceshipIndex].hull <= 0) {
-      console.log("Alien ship destroyed");
+      winner.textContent ="Alien ship destroyed";
     } else {
-      console.log(
-        "Alien ship not destroyed, its hull " + alienShips[spaceshipIndex].hull
-      );
+        winner.textContent = "Alien ship not destroyed, its hull " + alienShips[spaceshipIndex].hull;
     }
-  } else console.log("You missed!");
+  } else winner.textContent ="You missed!";
 }
 
 /*
@@ -152,43 +167,86 @@ ELSE
 
 function alien_atack() {
   if (Math.random() < alienShips[spaceshipIndex].accuracy) {
-    console.log("The alien ship hits you! Your ship tooks damage!");
+    winner.textContent = "The alien ship hits you! Your ship tooks damage!";
     usShip.hull -= alienShips[spaceshipIndex].firepower;
+    shipHealth.textContent = "Hull " + usShip.hull;
+
     // console.log(usShip.hull);
     if (usShip.hull <= 0) {
-      console.log("Your ship has been destroyed!");
-      console.log("GAME OVER!");
+      winner.textContent = "Your ship has been destroyed!";
+      title.textContent = "GAME OVER!";
+      start.style.display = "inline-block";
+      
     } else {
-      console.log("Your hull " + usShip.hull);
+        shipHealth.textContent = "Hull " + usShip.hull;  
+        winner.textContent = "Your hull " + usShip.hull;
     }
-  } else console.log("Alien missed!");
+  } else winner.textContent ="Alien missed!";
 }
 
-let spaceshipIndex = 0;
-console.log("Battle begins");
 
-while (spaceshipIndex < alienShips.length && usShip.hull > 0) {
-    // console.log("Index "+spaceshipIndex + "length " + alienShips.length);
-    let target = alienShips[spaceshipIndex];
-    // console.log(target);
-    console.log(`Round ${spaceshipIndex + 1}. You are facing ${target.name}`);
 
-    while (target.hull > 0 && usShip.hull > 0) {
-        us_attack();
-        if (target.hull > 0) alien_atack();
-        else break;
-    }
+function spaceBattle () {
+    title.textContent = "Battle begins";
+    start.style.display = "none";
 
-    if (usShip.hull > 0 && target.hull <= 0)
-        console.log(`${usShip.name} win this round`);
-    else if (usShip.hull <= 0 && target.hull > 0)
-        console.log(`${target.name} win this round`);
+    
+
+
+
   
-    spaceshipIndex++;
+
+    while (spaceshipIndex < alienShips.length && usShip.hull > 0) {
+        
+        let target = alienShips[spaceshipIndex];
+
+        shipName.textContent = usShip.name ;
+        shipHealth.textContent = "Hull " + usShip.hull;
+
+        alienName.textContent = target.name;
+        alienHealth.textContent = "Hull " + target.hull;
+
+        round.textContent = `Round ${spaceshipIndex + 1}`;
+        winner.textContent = `You are facing ${target.name}`;
+
+        next.addEventListener("click", () => {
+            while (target.hull > 0 && usShip.hull > 0) {
+                // US Ship attacks first
+                us_attack();
+    
+                // Alien ship attacks if it's alive 
+                if (target.hull > 0) alien_atack();
+                else break;
+
+                if (usShip.hull > 0 && target.hull <= 0)
+                    winner.textContent = `${usShip.name} win this round`;
+                else if (usShip.hull <= 0 && target.hull > 0)
+                    winner.textContent = `${target.name} win this round`;
+            
+    
+               
+    
+               
+            }
+            
+
+        });
+
+         
+        spaceshipIndex++;
+    }
+    
+    if (spaceshipIndex >= alienShips.length && usShip.hull > 0) {
+        round.textContent = "Congratulations!";
+        winner.textContent = "Congratulations! You have destroyed all the alien ships";
+        title.textContent = "You WIN!";
+        start.style.display = "inline-block";
+        
+    }
 }
 
-if (spaceshipIndex >= alienShips.length && usShip.hull > 0) {
-    console.log("Congratulations!");
-    console.log("You have destroyed all aliens' ships.");
-    console.log("You WIN!");
-}
+
+
+    
+
+// start.addEventListener(onclick, spaceBattle );
