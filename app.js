@@ -115,27 +115,24 @@ PLAYER ATTACK
         DISPLAY "You missed!"             
 
 */
-let spaceshipIndex = 0;
 
 // let currentAlien = parseInt(getRandomValue (0,5));
 // console.log(currentAlien);
 // console.log(alienShips[currentAlien]);
-function us_attack () {
-    if (Math.random() < usShip.accuracy) {
-        console.log('Direct hit! Alien ship took damage!');
-        alienShips[spaceshipIndex].hull -=usShip.firepower; 
-        // console.log(alienShips[spaceshipIndex].hull);
-        if (alienShips[spaceshipIndex].hull <= 0) {
-            console.log('Alien ship destroyed');
-        }
-        else {
-            console.log('Alien ship not destroyed, its hull '+alienShips[spaceshipIndex].hull);
-        }
+function us_attack() {
+  if (Math.random() < usShip.accuracy) {
+    console.log("Direct hit! Alien ship took damage!");
+    alienShips[spaceshipIndex].hull -= usShip.firepower;
+    // console.log(alienShips[spaceshipIndex].hull);
+    if (alienShips[spaceshipIndex].hull <= 0) {
+      console.log("Alien ship destroyed");
+    } else {
+      console.log(
+        "Alien ship not destroyed, its hull " + alienShips[spaceshipIndex].hull
+      );
     }
-    else console.log('You missed!');
+  } else console.log("You missed!");
 }
-
-us_attack();
 
 /*
 ALIEN ATTACK
@@ -153,24 +150,45 @@ ELSE
     DISPLAY "Alien missed!"
 */
 
-
-function alien_atack () {
-    if (Math.random() < alienShips[spaceshipIndex].accuracy) {
-        console.log('The alien ship hits you! Your ship tooks damage!');
-        usShip.hull-= alienShips[spaceshipIndex].firepower; 
-        // console.log(usShip.hull);
-        if (usShip.hull <= 0) {
-            console.log('Your ship has been destroyed!');
-            console.log('GAME OVER!');
-        }
-        else {
-            console.log('Your hull '+ usShip.hull);
-        }
+function alien_atack() {
+  if (Math.random() < alienShips[spaceshipIndex].accuracy) {
+    console.log("The alien ship hits you! Your ship tooks damage!");
+    usShip.hull -= alienShips[spaceshipIndex].firepower;
+    // console.log(usShip.hull);
+    if (usShip.hull <= 0) {
+      console.log("Your ship has been destroyed!");
+      console.log("GAME OVER!");
+    } else {
+      console.log("Your hull " + usShip.hull);
     }
-    else console.log("Alien missed!");
+  } else console.log("Alien missed!");
 }
 
-alien_atack();
-
-
+let spaceshipIndex = 0;
 console.log("Battle begins");
+
+while (spaceshipIndex < alienShips.length && usShip.hull > 0) {
+    // console.log("Index "+spaceshipIndex + "length " + alienShips.length);
+    let target = alienShips[spaceshipIndex];
+    // console.log(target);
+    console.log(`Round ${spaceshipIndex + 1}. You are facing ${target.name}`);
+
+    while (target.hull > 0 && usShip.hull > 0) {
+        us_attack();
+        if (target.hull > 0) alien_atack();
+        else break;
+    }
+
+    if (usShip.hull > 0 && target.hull <= 0)
+        console.log(`${usShip.name} win this round`);
+    else if (usShip.hull <= 0 && target.hull > 0)
+        console.log(`${target.name} win this round`);
+  
+    spaceshipIndex++;
+}
+
+if (spaceshipIndex >= alienShips.length && usShip.hull > 0) {
+    console.log("Congratulations!");
+    console.log("You have destroyed all aliens' ships.");
+    console.log("You WIN!");
+}
