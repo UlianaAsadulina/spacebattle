@@ -52,3 +52,24 @@ START GAME
 END GAME
 
 */
+
+// --------GAME START ---------------
+    
+/* 
+Initialize USS Assembly spaceship with:
+        hull = 20
+        firepower = 5
+        accuracy = 0.7
+*/
+
+class AssemblySpaceship {
+    constructor (name) {
+        this.name = name;
+        this.hull = 20;
+        this.firepower = 5;
+        this.accuracy = 0.7;
+    }
+}
+
+const usShip = new AssemblySpaceship('USS Assembly spaceship');
+console.log (usShip);
