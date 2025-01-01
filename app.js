@@ -101,3 +101,76 @@ for (let i = 0; i < 6; i++) {
 }
 
 console.log(alienShips);
+
+/*
+PLAYER ATTACK
+    IF random number <= USS Assembly's accuracy
+        DISPLAY "Direct hit! Alien ship took damage!"
+        Alien ship's hull - USS Assembly's firepower
+        IF alien ship's hull <= 0
+            DISPLAY "Alien ship destroyed!"    
+        ELSE
+            DISPLAY Alien ship's hull                        
+    ELSE
+        DISPLAY "You missed!"             
+
+*/
+let spaceshipIndex = 0;
+
+// let currentAlien = parseInt(getRandomValue (0,5));
+// console.log(currentAlien);
+// console.log(alienShips[currentAlien]);
+function us_attack () {
+    if (Math.random() < usShip.accuracy) {
+        console.log('Direct hit! Alien ship took damage!');
+        alienShips[spaceshipIndex].hull -=usShip.firepower; 
+        // console.log(alienShips[spaceshipIndex].hull);
+        if (alienShips[spaceshipIndex].hull <= 0) {
+            console.log('Alien ship destroyed');
+        }
+        else {
+            console.log('Alien ship not destroyed, its hull '+alienShips[spaceshipIndex].hull);
+        }
+    }
+    else console.log('You missed!');
+}
+
+us_attack();
+
+/*
+ALIEN ATTACK
+                
+IF random number <= alien ship's accuracy
+   
+    DISPLAY "The alien ship hit you! Your ship took damage!
+    USS Assembly's hull - alien ship's firepower
+    IF USS Assembly's hull <= 0
+        DISPLAY "Your ship has been destroyed! Game over!"
+        END GAME
+    ELSE
+        DISPLAY USS Assembly's hull
+ELSE
+    DISPLAY "Alien missed!"
+*/
+
+
+function alien_atack () {
+    if (Math.random() < alienShips[spaceshipIndex].accuracy) {
+        console.log('The alien ship hits you! Your ship tooks damage!');
+        usShip.hull-= alienShips[spaceshipIndex].firepower; 
+        // console.log(usShip.hull);
+        if (usShip.hull <= 0) {
+            console.log('Your ship has been destroyed!');
+            console.log('GAME OVER!');
+        }
+        else {
+            console.log('Your hull '+ usShip.hull);
+        }
+    }
+    else console.log("Alien missed!");
+}
+
+alien_atack();
+
+
+console.log("Battle begins");
