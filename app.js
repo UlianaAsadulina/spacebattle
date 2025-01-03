@@ -184,7 +184,7 @@ function alien_atack() {
   } else winner.textContent ="Alien missed!";
 }
 
-
+/*
 
 function spaceBattle () {
     title.textContent = "Battle begins";
@@ -254,4 +254,87 @@ function attack(spaceshipIndex) {
 
     
 
-// start.addEventListener(onclick, spaceBattle );
+// start.addEventListener(onclick, spaceBattle );*/
+
+
+
+let isAlienDestroyed = false; // Tracks if the current alien ship is destroyed
+
+// Start the battle
+function spaceBattle() {
+    title.textContent = "Battle begins";
+    start.style.display = "none";
+
+    let target = alienShips[spaceshipIndex];
+
+    // Initialize the first round
+    spaceshipIndex = 0;
+    isAlienDestroyed = false;
+    console.log("US Hull " + usShip.hull);
+    console.log("Target Hull " + target.hull);
+    initializeRound();
+}
+
+// Initialize the current round
+function initializeRound() {
+    if (spaceshipIndex < alienShips.length && usShip.hull > 0) {
+        let target = alienShips[spaceshipIndex];
+
+        shipName.textContent = usShip.name;
+        shipHealth.textContent = "Hull " + usShip.hull;
+
+        alienName.textContent = target.name;
+        alienHealth.textContent = "Hull " + target.hull;
+
+        round.textContent = `Round ${spaceshipIndex + 1}`;
+        winner.textContent = `You are facing ${target.name}`;
+
+        isAlienDestroyed = false; // Reset for the new round
+        next.textContent = "ATTACK";
+    } else 
+        if (usShip.hull > 0) {
+            round.textContent = "Congratulations!";
+            winner.textContent = "You have destroyed all the alien ships";
+            title.textContent = "You WIN!";
+            start.style.display = "inline-block";
+        }
+}
+
+// Attack function for the next button
+function attack() {
+    if (spaceshipIndex >= alienShips.length || usShip.hull <= 0) {
+        return; // Game over or no more aliens to attack
+    }
+
+    let target = alienShips[spaceshipIndex];
+
+    if (!isAlienDestroyed) {
+        // USS Assembly attacks first
+        us_attack();
+
+        if (target.hull <= 0) {
+            isAlienDestroyed = true; // Mark the current alien ship as destroyed
+            winner.textContent = `${target.name} is destroyed! Click "Next" to face the next alien ship.`;
+            next.textContent = "Next Round";
+        } else {
+            // Alien attacks if it's still alive
+            alien_atack();
+
+            if (usShip.hull <= 0) {
+                winner.textContent = "Your ship has been destroyed! Game over!";
+                title.textContent = "GAME OVER!";
+                start.style.display = "inline-block";
+            }
+        }
+    } else {
+        // Move to the next alien ship
+        spaceshipIndex++;
+        initializeRound();
+    }
+}
+
+// Event listener for the start button
+start.addEventListener("click", spaceBattle);
+
+// Event listener for the next button
+next.addEventListener("click", attack);
