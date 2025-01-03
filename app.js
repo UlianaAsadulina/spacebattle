@@ -209,28 +209,9 @@ function spaceBattle () {
         round.textContent = `Round ${spaceshipIndex + 1}`;
         winner.textContent = `You are facing ${target.name}`;
 
-        next.addEventListener("click", () => {
-            while (target.hull > 0 && usShip.hull > 0) {
-                // US Ship attacks first
-                us_attack();
-    
-                // Alien ship attacks if it's alive 
-                if (target.hull > 0) alien_atack();
-                else break;
+        // attack function if button clicked
 
-                if (usShip.hull > 0 && target.hull <= 0)
-                    winner.textContent = `${usShip.name} win this round`;
-                else if (usShip.hull <= 0 && target.hull > 0)
-                    winner.textContent = `${target.name} win this round`;
-            
-    
-               
-    
-               
-            }
-            
-
-        });
+        
 
          
         spaceshipIndex++;
@@ -244,6 +225,30 @@ function spaceBattle () {
         
     }
 }
+
+function attack(spaceshipIndex) {
+    let target = alienShips[spaceshipIndex];
+    while (target.hull > 0 && usShip.hull > 0) {
+        // US Ship attacks first
+        us_attack();
+
+        // Alien ship attacks if it's alive 
+        if (target.hull > 0) alien_atack();
+        else break;
+
+        if (usShip.hull > 0 && target.hull <= 0)
+            winner.textContent = `${usShip.name} win this round`;
+        else if (usShip.hull <= 0 && target.hull > 0)
+            winner.textContent = `${target.name} win this round`;
+    
+
+       
+
+       
+    }
+    
+
+};
 
 
 
